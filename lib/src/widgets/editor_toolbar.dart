@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notus_format/notus_format.dart';
-
+import 'package:community_material_icon/community_material_icon.dart';
 import 'controller.dart';
 
 const double kToolbarHeight = 56.0;
@@ -87,7 +87,7 @@ class _LinkStyleButtonState extends State<LinkStyleButton> {
       hoverElevation: 0,
       size: 32,
       icon: Icon(
-        widget.icon ?? Icons.link,
+        widget.icon ?? CommunityMaterialIcons.link,
         size: 18,
         color: isEnabled ? theme.iconTheme.color : theme.disabledColor,
       ),
@@ -404,7 +404,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         visible: !hideBoldButton,
         child: ToggleStyleButton(
           attribute: NotusAttribute.bold,
-          icon: Icons.format_bold,
+          icon: CommunityMaterialIcons.format_bold,
           controller: controller,
         ),
       ),
@@ -413,7 +413,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         visible: !hideItalicButton,
         child: ToggleStyleButton(
           attribute: NotusAttribute.italic,
-          icon: Icons.format_italic,
+          icon: CommunityMaterialIcons.format_italic,
           controller: controller,
         ),
       ),
@@ -422,7 +422,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         visible: !hideUnderLineButton,
         child: ToggleStyleButton(
           attribute: NotusAttribute.underline,
-          icon: Icons.format_underline,
+          icon: CommunityMaterialIcons.format_underline,
           controller: controller,
         ),
       ),
@@ -431,7 +431,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         visible: !hideStrikeThrough,
         child: ToggleStyleButton(
           attribute: NotusAttribute.strikethrough,
-          icon: Icons.format_strikethrough,
+          icon: CommunityMaterialIcons.format_strikethrough,
           controller: controller,
         ),
       ),
@@ -448,7 +448,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         child: ToggleStyleButton(
           attribute: NotusAttribute.block.numberList,
           controller: controller,
-          icon: Icons.format_list_numbered,
+          icon: CommunityMaterialIcons.format_list_numbered,
         ),
       ),
       Visibility(
@@ -456,7 +456,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         child: ToggleStyleButton(
           attribute: NotusAttribute.block.bulletList,
           controller: controller,
-          icon: Icons.format_list_bulleted,
+          icon: CommunityMaterialIcons.format_list_bulleted,
         ),
       ),
       Visibility(
@@ -464,7 +464,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         child: ToggleStyleButton(
           attribute: NotusAttribute.block.code,
           controller: controller,
-          icon: Icons.code,
+          icon: CommunityMaterialIcons.code_json,
         ),
       ),
       Visibility(
@@ -476,7 +476,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         child: ToggleStyleButton(
           attribute: NotusAttribute.block.quote,
           controller: controller,
-          icon: Icons.format_quote,
+          icon: CommunityMaterialIcons.format_quote_close,
         ),
       ),
       Visibility(
@@ -489,7 +489,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         visible: !hideHorizontalRule,
         child: InsertEmbedButton(
           controller: controller,
-          icon: Icons.horizontal_rule,
+          icon: CommunityMaterialIcons.horizontal_rotate_clockwise,
         ),
       ),
     ]);
@@ -646,7 +646,7 @@ class _ZDropdownButtonState<T> extends State<ZDropdownButton<T>> {
           children: [
             widget.child,
             Expanded(child: Container()),
-            Icon(Icons.arrow_drop_down, size: 14)
+            Icon(CommunityMaterialIcons.chevron_down, size: 14)
           ],
         ),
       ),
