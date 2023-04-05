@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:notus_format/notus_format.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'controller.dart';
 
 const double kToolbarHeight = 56.0;
@@ -87,7 +87,7 @@ class _LinkStyleButtonState extends State<LinkStyleButton> {
       hoverElevation: 0,
       size: 32,
       icon: Icon(
-        widget.icon ?? CommunityMaterialIcons.link,
+        widget.icon ?? Iconsax.link,
         size: 18,
         color: isEnabled ? theme.iconTheme.color : theme.disabledColor,
       ),
@@ -404,7 +404,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         visible: !hideBoldButton,
         child: ToggleStyleButton(
           attribute: NotusAttribute.bold,
-          icon: CommunityMaterialIcons.format_bold,
+          icon: Iconsax.format_bold,
           controller: controller,
         ),
       ),
@@ -413,7 +413,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         visible: !hideItalicButton,
         child: ToggleStyleButton(
           attribute: NotusAttribute.italic,
-          icon: CommunityMaterialIcons.format_italic,
+          icon: Iconsax.format_italic,
           controller: controller,
         ),
       ),
@@ -422,7 +422,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         visible: !hideUnderLineButton,
         child: ToggleStyleButton(
           attribute: NotusAttribute.underline,
-          icon: CommunityMaterialIcons.format_underline,
+          icon: Iconsax.format_underline,
           controller: controller,
         ),
       ),
@@ -431,7 +431,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         visible: !hideStrikeThrough,
         child: ToggleStyleButton(
           attribute: NotusAttribute.strikethrough,
-          icon: CommunityMaterialIcons.format_strikethrough,
+          icon: Iconsax.format_strikethrough,
           controller: controller,
         ),
       ),
@@ -448,7 +448,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         child: ToggleStyleButton(
           attribute: NotusAttribute.block.numberList,
           controller: controller,
-          icon: CommunityMaterialIcons.format_list_numbered,
+          icon: Iconsax.format_list_numbered,
         ),
       ),
       Visibility(
@@ -456,7 +456,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         child: ToggleStyleButton(
           attribute: NotusAttribute.block.bulletList,
           controller: controller,
-          icon: CommunityMaterialIcons.format_list_bulleted,
+          icon: Iconsax.format_list_bulleted,
         ),
       ),
       Visibility(
@@ -464,7 +464,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         child: ToggleStyleButton(
           attribute: NotusAttribute.block.code,
           controller: controller,
-          icon: CommunityMaterialIcons.code_json,
+          icon: Iconsax.code_json,
         ),
       ),
       Visibility(
@@ -476,7 +476,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         child: ToggleStyleButton(
           attribute: NotusAttribute.block.quote,
           controller: controller,
-          icon: CommunityMaterialIcons.format_quote_close,
+          icon: Iconsax.format_quote_close,
         ),
       ),
       Visibility(
@@ -489,7 +489,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
         visible: !hideHorizontalRule,
         child: InsertEmbedButton(
           controller: controller,
-          icon: CommunityMaterialIcons.horizontal_rotate_clockwise,
+          icon: Iconsax.horizontal_rotate_clockwise,
         ),
       ),
     ]);
@@ -646,7 +646,7 @@ class _ZDropdownButtonState<T> extends State<ZDropdownButton<T>> {
           children: [
             widget.child,
             Expanded(child: Container()),
-            Icon(CommunityMaterialIcons.chevron_down, size: 14)
+            Icon(Iconsax.chevron_down, size: 14)
           ],
         ),
       ),
