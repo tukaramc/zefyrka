@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'dart:async';
 
 import 'package:flutter/services.dart';
@@ -97,6 +99,7 @@ class CursorStyle {
   }
 
   @override
+  // ignore: deprecated_member_use
   int get hashCode => hashValues(color, backgroundColor, width, height, radius,
       offset, opacityAnimates, paintAboveText);
 }

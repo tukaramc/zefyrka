@@ -180,9 +180,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _launchUrl(String url) async {
-    final result = await canLaunch(url);
+    final result = await canLaunchUrl(Uri.parse(url));
     if (result) {
-      await launch(url);
+      await launchUrl(Uri.parse(url));
     }
   }
 

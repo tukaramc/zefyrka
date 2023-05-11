@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 /// Applies a Zefyr editor theme to descendant widgets.
 ///

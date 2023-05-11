@@ -189,7 +189,7 @@ class EditorTextSelectionOverlay {
               _buildHandle(context, _TextSelectionHandlePosition.end)),
     ];
 
-    Overlay.of(context, rootOverlay: true, debugRequiredFor: debugRequiredFor)!
+    Overlay.of(context, rootOverlay: true, debugRequiredFor: debugRequiredFor)
         .insertAll(_handles!);
   }
 
@@ -206,7 +206,7 @@ class EditorTextSelectionOverlay {
   void showToolbar() {
     assert(_toolbar == null);
     _toolbar = OverlayEntry(builder: _buildToolbar);
-    Overlay.of(context, rootOverlay: true, debugRequiredFor: debugRequiredFor)!
+    Overlay.of(context, rootOverlay: true, debugRequiredFor: debugRequiredFor)
         .insert(_toolbar!);
     _toolbarController.forward(from: 0.0);
   }
@@ -342,6 +342,7 @@ class EditorTextSelectionOverlay {
         link: toolbarLayerLink,
         showWhenUnlinked: false,
         offset: -editingRegion.topLeft,
+        // ignore: deprecated_member_use
         child: selectionControls!.buildToolbar(
           context,
           editingRegion,
@@ -417,6 +418,7 @@ class _TextSelectionHandleOverlay extends StatefulWidget {
 class _TextSelectionHandleOverlayState
     extends State<_TextSelectionHandleOverlay>
     with SingleTickerProviderStateMixin {
+  // ignore: unused_field
   late Offset _dragPosition;
 
   late AnimationController _controller;
@@ -1303,6 +1305,7 @@ class _EditorTextSelectionGestureDetectorState
 // the handle's padded hit area.  For example, the selection handle needs to
 // handle single taps on itself, but double taps need to be handled by the
 // underlying input.
+// ignore: unused_element
 class _TransparentTapGestureRecognizer extends TapGestureRecognizer {
   _TransparentTapGestureRecognizer({
     Object? debugOwner,

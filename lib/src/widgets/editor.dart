@@ -503,6 +503,7 @@ class RawEditor extends StatefulWidget {
     this.onLaunchUrl,
     required this.selectionColor,
     this.scrollPhysics,
+    // ignore: deprecated_member_use
     this.toolbarOptions = const ToolbarOptions(
       copy: true,
       cut: true,
@@ -561,6 +562,7 @@ class RawEditor extends StatefulWidget {
   ///
   /// By default, all options are enabled. If [readOnly] is true,
   /// paste and cut will be disabled regardless.
+  // ignore: deprecated_member_use
   final ToolbarOptions toolbarOptions;
 
   /// Whether to show selection handles.
@@ -736,6 +738,7 @@ class RawEditorState extends EditorState
 
   // Cursors
   CursorController? _cursorController;
+  // ignore: unused_field
   FloatingCursorController? _floatingCursorController;
 
   // Keyboard
@@ -1064,7 +1067,7 @@ class RawEditorState extends EditorState
     SchedulerBinding.instance.addPostFrameCallback((Duration _) {
       _showCaretOnScreenScheduled = false;
 
-      final viewport = RenderAbstractViewport.of(renderEditor)!;
+      final viewport = RenderAbstractViewport.of(renderEditor);
       final editorOffset =
           renderEditor.localToGlobal(Offset(0.0, 0.0), ancestor: viewport);
       final offsetInViewport = _scrollController!.offset + editorOffset.dy;
