@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'controller.dart';
@@ -167,9 +168,9 @@ class ZefyrField extends StatefulWidget {
 class _ZefyrFieldState extends State<ZefyrField> {
   late bool _focused;
   void _editorFocusChanged() {
-    setState(() {
-      _focused = widget.focusNode!.hasFocus;
-    });
+    // setState(() {
+    _focused = widget.focusNode!.hasFocus;
+    // });
   }
 
   @override
@@ -216,7 +217,7 @@ class _ZefyrFieldState extends State<ZefyrField> {
         children: [
           child,
           Visibility(
-            visible: _focused,
+            visible: true,
             maintainSize: true,
             maintainAnimation: true,
             maintainState: true,
