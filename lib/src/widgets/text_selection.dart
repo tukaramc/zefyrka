@@ -968,7 +968,6 @@ class EditorTextSelectionGestureDetectorBuilder {
       onSingleLongTapEnd: onSingleLongTapEnd,
       onDoubleTapDown: onDoubleTapDown,
       onDragSelectionStart: onDragSelectionStart,
-      onDragSelectionUpdate: onDragSelectionUpdate,
       onDragSelectionEnd: onDragSelectionEnd,
       behavior: behavior,
       child: child,
@@ -1007,7 +1006,6 @@ class EditorTextSelectionGestureDetector extends StatefulWidget {
     this.onSingleLongTapEnd,
     this.onDoubleTapDown,
     this.onDragSelectionStart,
-    this.onDragSelectionUpdate,
     this.onDragSelectionEnd,
     this.behavior,
     required this.child,
@@ -1066,7 +1064,6 @@ class EditorTextSelectionGestureDetector extends StatefulWidget {
   /// The frequency of calls is throttled to avoid excessive text layout
   /// operations in text fields. The throttling is controlled by the constant
   /// [_kDragSelectionUpdateThrottle].
-  final DragSelectionUpdateCallback? onDragSelectionUpdate;
 
   /// Called when a mouse that was previously dragging is released.
   final GestureDragEndCallback? onDragSelectionEnd;
@@ -1160,8 +1157,8 @@ class _EditorTextSelectionGestureDetectorState
   void _handleDragUpdateThrottled() {
     assert(_lastDragStartDetails != null);
     assert(_lastDragUpdateDetails != null);
-    widget.onDragSelectionUpdate
-        ?.call(_lastDragStartDetails!, _lastDragUpdateDetails!);
+    // widget.onDragSelectionUpdate
+    //     ?.call(_lastDragStartDetails!, _lastDragUpdateDetails!);
     _dragUpdateThrottleTimer = null;
     _lastDragUpdateDetails = null;
   }
@@ -1246,8 +1243,7 @@ class _EditorTextSelectionGestureDetectorState
         widget.onSingleLongTapEnd != null) {
       gestures[LongPressGestureRecognizer] =
           GestureRecognizerFactoryWithHandlers<LongPressGestureRecognizer>(
-        () => LongPressGestureRecognizer(
-            debugOwner: this, kind: PointerDeviceKind.touch),
+        () => LongPressGestureRecognizer(debugOwner: this),
         (LongPressGestureRecognizer instance) {
           instance
             ..onLongPressStart = _handleLongPressStart
@@ -1258,14 +1254,12 @@ class _EditorTextSelectionGestureDetectorState
     }
 
     if (widget.onDragSelectionStart != null ||
-        widget.onDragSelectionUpdate != null ||
         widget.onDragSelectionEnd != null) {
       // TODO(mdebbar): Support dragging in any direction (for multiline text).
       // https://github.com/flutter/flutter/issues/28676
       gestures[HorizontalDragGestureRecognizer] =
           GestureRecognizerFactoryWithHandlers<HorizontalDragGestureRecognizer>(
-        () => HorizontalDragGestureRecognizer(
-            debugOwner: this, kind: PointerDeviceKind.mouse),
+        () => HorizontalDragGestureRecognizer(debugOwner: this),
         (HorizontalDragGestureRecognizer instance) {
           instance
             // Text selection should start from the position of the first pointer
