@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'controller.dart';
@@ -166,17 +165,17 @@ class ZefyrField extends StatefulWidget {
 }
 
 class _ZefyrFieldState extends State<ZefyrField> {
-  late bool _focused;
+  // late bool _focused;
   void _editorFocusChanged() {
     // setState(() {
-    _focused = widget.focusNode!.hasFocus;
+    // _focused = widget.focusNode!.hasFocus;
     // });
   }
 
   @override
   void initState() {
     super.initState();
-    _focused = widget.focusNode!.hasFocus;
+    // _focused = widget.focusNode!.hasFocus;
     widget.focusNode!.addListener(_editorFocusChanged);
   }
 
@@ -186,7 +185,7 @@ class _ZefyrFieldState extends State<ZefyrField> {
     if (widget.focusNode != oldWidget.focusNode) {
       oldWidget.focusNode!.removeListener(_editorFocusChanged);
       widget.focusNode!.addListener(_editorFocusChanged);
-      _focused = widget.focusNode!.hasFocus;
+      // _focused = widget.focusNode!.hasFocus;
     }
   }
 
