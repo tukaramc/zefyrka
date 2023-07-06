@@ -13,7 +13,7 @@ dependencies:
   iconsax:
     git:
       url: https://github.com/tukaramc/flutter_iconsax1.git
-      ref: 64ee75e2cd280a3c413c7e91e6d002d12a0efe92
+      ref: c06d41d178fe13b79ee133554b87aaa425c4e046
 
   collection: ^1.16.0
   url_launcher: ^6.1.2
