@@ -45,7 +45,7 @@ class _FullPageEditorScreenState extends State<FullPageEditorScreen> {
   void initState() {
     super.initState();
     _sub = _controller.document.changes.listen((change) {
-      print('${change.source}: ${change.change}');
+      debugPrint('${change.source}: ${change.change}');
     });
   }
 
