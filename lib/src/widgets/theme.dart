@@ -109,7 +109,7 @@ class ZefyrThemeData {
     final themeData = Theme.of(context);
     final defaultStyle = DefaultTextStyle.of(context);
     final baseStyle = defaultStyle.style.copyWith(
-      fontSize: 16.0,
+      fontSize: 13.0,
       height: 1.3,
     );
     final baseSpacing = VerticalSpacing(top: 6.0, bottom: 10);
