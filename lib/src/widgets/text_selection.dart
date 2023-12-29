@@ -18,6 +18,9 @@ import 'package:flutter/services.dart';
 import '../rendering/editor.dart';
 import 'editor.dart';
 
+typedef DragSelectionUpdateCallback = void Function(
+    DragStartDetails startDetails, DragUpdateDetails updateDetails);
+
 /// A duration that controls how often the drag selection update callback is
 /// called.
 const Duration _kDragSelectionUpdateThrottle = Duration(milliseconds: 50);
@@ -189,7 +192,7 @@ class EditorTextSelectionOverlay {
               _buildHandle(context, _TextSelectionHandlePosition.end)),
     ];
 
-    Overlay.of(context, rootOverlay: true, debugRequiredFor: debugRequiredFor)
+    Overlay.of(context, rootOverlay: true, debugRequiredFor: debugRequiredFor)!
         .insertAll(_handles!);
   }
 
@@ -206,7 +209,7 @@ class EditorTextSelectionOverlay {
   void showToolbar() {
     assert(_toolbar == null);
     _toolbar = OverlayEntry(builder: _buildToolbar);
-    Overlay.of(context, rootOverlay: true, debugRequiredFor: debugRequiredFor)
+    Overlay.of(context, rootOverlay: true, debugRequiredFor: debugRequiredFor)!
         .insert(_toolbar!);
     _toolbarController.forward(from: 0.0);
   }
@@ -342,7 +345,6 @@ class EditorTextSelectionOverlay {
         link: toolbarLayerLink,
         showWhenUnlinked: false,
         offset: -editingRegion.topLeft,
-        // ignore: deprecated_member_use
         child: selectionControls!.buildToolbar(
           context,
           editingRegion,
@@ -418,7 +420,6 @@ class _TextSelectionHandleOverlay extends StatefulWidget {
 class _TextSelectionHandleOverlayState
     extends State<_TextSelectionHandleOverlay>
     with SingleTickerProviderStateMixin {
-  // ignore: unused_field
   late Offset _dragPosition;
 
   late AnimationController _controller;
@@ -970,6 +971,7 @@ class EditorTextSelectionGestureDetectorBuilder {
       onSingleLongTapEnd: onSingleLongTapEnd,
       onDoubleTapDown: onDoubleTapDown,
       onDragSelectionStart: onDragSelectionStart,
+      onDragSelectionUpdate: onDragSelectionUpdate,
       onDragSelectionEnd: onDragSelectionEnd,
       behavior: behavior,
       child: child,
@@ -1008,6 +1010,7 @@ class EditorTextSelectionGestureDetector extends StatefulWidget {
     this.onSingleLongTapEnd,
     this.onDoubleTapDown,
     this.onDragSelectionStart,
+    this.onDragSelectionUpdate,
     this.onDragSelectionEnd,
     this.behavior,
     required this.child,
@@ -1066,6 +1069,7 @@ class EditorTextSelectionGestureDetector extends StatefulWidget {
   /// The frequency of calls is throttled to avoid excessive text layout
   /// operations in text fields. The throttling is controlled by the constant
   /// [_kDragSelectionUpdateThrottle].
+  final DragSelectionUpdateCallback? onDragSelectionUpdate;
 
   /// Called when a mouse that was previously dragging is released.
   final GestureDragEndCallback? onDragSelectionEnd;
@@ -1159,8 +1163,8 @@ class _EditorTextSelectionGestureDetectorState
   void _handleDragUpdateThrottled() {
     assert(_lastDragStartDetails != null);
     assert(_lastDragUpdateDetails != null);
-    // widget.onDragSelectionUpdate
-    //     ?.call(_lastDragStartDetails!, _lastDragUpdateDetails!);
+    widget.onDragSelectionUpdate
+        ?.call(_lastDragStartDetails!, _lastDragUpdateDetails!);
     _dragUpdateThrottleTimer = null;
     _lastDragUpdateDetails = null;
   }
@@ -1245,7 +1249,9 @@ class _EditorTextSelectionGestureDetectorState
         widget.onSingleLongTapEnd != null) {
       gestures[LongPressGestureRecognizer] =
           GestureRecognizerFactoryWithHandlers<LongPressGestureRecognizer>(
-        () => LongPressGestureRecognizer(debugOwner: this),
+        () => LongPressGestureRecognizer(
+            debugOwner: this,
+            supportedDevices: Set.of({PointerDeviceKind.touch})),
         (LongPressGestureRecognizer instance) {
           instance
             ..onLongPressStart = _handleLongPressStart
@@ -1256,12 +1262,15 @@ class _EditorTextSelectionGestureDetectorState
     }
 
     if (widget.onDragSelectionStart != null ||
+        widget.onDragSelectionUpdate != null ||
         widget.onDragSelectionEnd != null) {
       // TODO(mdebbar): Support dragging in any direction (for multiline text).
       // https://github.com/flutter/flutter/issues/28676
       gestures[HorizontalDragGestureRecognizer] =
           GestureRecognizerFactoryWithHandlers<HorizontalDragGestureRecognizer>(
-        () => HorizontalDragGestureRecognizer(debugOwner: this),
+        () => HorizontalDragGestureRecognizer(
+            debugOwner: this,
+            supportedDevices: Set.of({PointerDeviceKind.mouse})),
         (HorizontalDragGestureRecognizer instance) {
           instance
             // Text selection should start from the position of the first pointer
@@ -1305,7 +1314,6 @@ class _EditorTextSelectionGestureDetectorState
 // the handle's padded hit area.  For example, the selection handle needs to
 // handle single taps on itself, but double taps need to be handled by the
 // underlying input.
-// ignore: unused_element
 class _TransparentTapGestureRecognizer extends TapGestureRecognizer {
   _TransparentTapGestureRecognizer({
     Object? debugOwner,
