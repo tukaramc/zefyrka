@@ -261,7 +261,7 @@ Widget defaultToggleStyleButtonBuilder(
           : theme.iconTheme.color
       : theme.disabledColor;
   // ignore: deprecated_member_use
-  final fillColor = isToggled ? theme.toggleableActiveColor : theme.canvasColor;
+  final fillColor = isToggled ? theme.colorScheme.secondary : theme.canvasColor;
   return ZIconButton(
     highlightElevation: 0,
     hoverElevation: 0,
