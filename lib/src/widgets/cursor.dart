@@ -100,7 +100,7 @@ class CursorStyle {
 
   @override
   // ignore: deprecated_member_use
-  int get hashCode => hashValues(color, backgroundColor, width, height, radius,
+  int get hashCode => Object.hash(color, backgroundColor, width, height, radius,
       offset, opacityAnimates, paintAboveText);
 }
 
